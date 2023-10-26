@@ -1,6 +1,7 @@
 package com.lcsoft.ChefsHubApp.model.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 
 import java.time.LocalDate;
 import java.util.Set;
@@ -11,6 +12,7 @@ public class User extends BaseEntity{
     @Column(nullable = false)
     private String username;
     @Column(nullable = false, unique = true)
+    @Email
     private String email;
     @Column(nullable = false)
     private String password;
