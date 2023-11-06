@@ -4,5 +4,5 @@ public enum RoleType {
     COMMON_USER,
     ADMIN,
     MODERATOR,
-    PREMIUM_USER
+    PREMIUM
 }

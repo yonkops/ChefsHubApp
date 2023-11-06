@@ -1,4 +1,4 @@
-package com.lcsoft.ChefsHubApp.repository;
+package com.lcsoft.ChefsHubApp.model.repository;
 
 import com.lcsoft.ChefsHubApp.model.entity.Recipe;
 import org.springframework.data.jpa.repository.JpaRepository;

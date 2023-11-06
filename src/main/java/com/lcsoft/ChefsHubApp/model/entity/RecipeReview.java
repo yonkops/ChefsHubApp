@@ -13,7 +13,7 @@ public class RecipeReview extends BaseEntity {
     private int rating;
     private String comment;
     @ManyToOne
-    private User createdBy;
+    private UserEntity createdBy;
 
     public RecipeReview() {
     }
@@ -42,11 +42,11 @@ public class RecipeReview extends BaseEntity {
         this.comment = comment;
     }
 
-    public User getCreatedBy() {
+    public UserEntity getCreatedBy() {
         return createdBy;
     }
 
-    public void setCreatedBy(User createdBy) {
+    public void setCreatedBy(UserEntity createdBy) {
         this.createdBy = createdBy;
     }
 }

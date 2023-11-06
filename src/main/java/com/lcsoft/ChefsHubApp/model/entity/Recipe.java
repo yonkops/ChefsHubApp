@@ -19,7 +19,7 @@ public class Recipe extends BaseEntity {
     @Column(nullable = false)
     private String description;
     @ManyToOne
-    private User createdBy;
+    private UserEntity createdBy;
     private LocalDate createdDate;
     @Enumerated(EnumType.STRING)
     private RecipeAccessType recipeAccess;
@@ -60,11 +60,11 @@ public class Recipe extends BaseEntity {
         this.description = description;
     }
 
-    public User getCreatedBy() {
+    public UserEntity getCreatedBy() {
         return createdBy;
     }
 
-    public void setCreatedBy(User createdBy) {
+    public void setCreatedBy(UserEntity createdBy) {
         this.createdBy = createdBy;
     }
 

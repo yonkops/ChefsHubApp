@@ -1,5 +1,6 @@
 package com.lcsoft.ChefsHubApp.model.entity;
 
+import com.lcsoft.ChefsHubApp.model.entity.BaseEntity;
 import com.lcsoft.ChefsHubApp.model.enums.RoleType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
