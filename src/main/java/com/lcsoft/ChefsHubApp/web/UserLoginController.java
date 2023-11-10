@@ -1,9 +1,9 @@
 package com.lcsoft.ChefsHubApp.web;
 
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.lcsoft.ChefsHubApp.model.dto.UserDto;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -15,9 +15,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import com.lcsoft.ChefsHubApp.model.dto.LoginFormDto;
-
-
 
 @Controller
 @RequestMapping("/users")
@@ -33,7 +30,7 @@ public class UserLoginController {
     }
 
     @PostMapping("/login")
-    public String loginSubmit(@ModelAttribute("loginForm") @Valid LoginFormDto loginForm, BindingResult bindingResult) {
+    public String loginSubmit(@ModelAttribute("loginForm") @Valid UserDto loginForm, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "auth-login";
         }
@@ -58,5 +55,16 @@ public class UserLoginController {
         model.addAttribute("email", email);
         model.addAttribute("bad_credentials", "true");
         return "auth-login";
+    }
+
+    @GetMapping("/user")
+    public String getUser(Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        ObjectMapper objectMapper = new ObjectMapper();
+        UserDto userDto = objectMapper.convertValue(authentication, UserDto.class);
+
+        model.addAttribute("userDto", userDto);
+
+        return "profile";
     }
 }

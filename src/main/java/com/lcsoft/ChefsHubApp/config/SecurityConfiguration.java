@@ -20,12 +20,10 @@ public class SecurityConfiguration {
     /*private final String rememberMeKey;*/
     /*private final UserDetailsService userDetailsService;*/
     private final UserRepository userRepository;
-    //private final AuthenticationManager authenticationManager;
 
-    public SecurityConfiguration(/*@Value("${chefshub.remember.me.key}") String rememberMeKey,*/ /*UserDetailsService userDetailsService,*/ UserRepository userRepository) {
+    public SecurityConfiguration(/*@Value("${chefshub.remember.me.key}") String rememberMeKey,*/ UserRepository userRepository) {
         /*this.rememberMeKey = rememberMeKey;*/
         this.userRepository = userRepository;
-        /*this.userDetailsService = userDetailsService(userRepository);*/
     }
 
     @Bean
@@ -33,28 +31,15 @@ public class SecurityConfiguration {
         return authenticationConfiguration.getAuthenticationManager();
     }
 
-/*
-    @Bean
-    public UserLoginController userLoginAuth(AuthenticationManager authenticationManager) {
-        return new UserLoginController(authenticationManager);
-    }
-*/
-
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder(12);
+        return new BCryptPasswordEncoder();
     }
 
     @Bean
     public UserDetailsService userDetailsService(UserRepository userRepository) {
         return new CustomUserDetailsService(userRepository, passwordEncoder());
     }
-
-
-    /*@Bean
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService(userRepository)).passwordEncoder(passwordEncoder());
-    }*/
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -66,7 +51,7 @@ public class SecurityConfiguration {
                         // Allow access to specific endpoints for all users
                         .requestMatchers("/", "/users/login", "/users/register").permitAll()
                         .requestMatchers("/error").permitAll()
-                        .requestMatchers("/recipes/add").authenticated()
+                        .requestMatchers("/recipe/add").authenticated()
                         //.requestMatchers("/admin/**").hasRole(RoleType.ADMIN.name())
                         //.requestMatchers("/users/**").hasRole(RoleType.COMMON_USER.name())
                         // Require authentication for any other request
@@ -79,7 +64,7 @@ public class SecurityConfiguration {
                             .usernameParameter("email")
                             .passwordParameter("password")
                             .defaultSuccessUrl("/")
-                            .failureForwardUrl("/user/login-error");
+                            .failureForwardUrl("/users/login");
                 }
         ).logout(
                 logout -> {

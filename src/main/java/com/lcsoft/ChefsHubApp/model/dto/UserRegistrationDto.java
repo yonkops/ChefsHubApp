@@ -2,7 +2,6 @@ package com.lcsoft.ChefsHubApp.model.dto;
 
 
 import com.lcsoft.ChefsHubApp.validation.FieldMatch;
-import com.lcsoft.ChefsHubApp.validation.PasswordMatches;
 import com.lcsoft.ChefsHubApp.validation.UniqueUserEmail;
 import jakarta.validation.constraints.*;
 
@@ -12,7 +11,7 @@ import jakarta.validation.constraints.*;
         second = "confirmPassword",
         message = "Passwords should match."
 )
-public record UserRegistrationDTO(@NotEmpty(message = "First Name is required")
+public record UserRegistrationDto(@NotEmpty(message = "First Name is required")
                                   @Size(min = 3, max = 30)
                                   String firstName,
                                   @NotEmpty(message = "Last Name is required")

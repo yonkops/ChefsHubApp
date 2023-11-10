@@ -61,6 +61,8 @@ public class UserLoginRegisterTests {
         MultiValueMap<String, String> registerParams = new LinkedMultiValueMap<>();
         registerParams.add("username", "usertest@email.com");
         registerParams.add("password", "passwordtest");
+        registerParams.add("firstName", "test2");
+        registerParams.add("lasstName", "test22");
 
         HttpEntity<MultiValueMap<String, String>> registerRequest = new HttpEntity<>(registerParams, headers);
 

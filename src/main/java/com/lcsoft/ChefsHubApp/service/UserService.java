@@ -2,10 +2,10 @@ package com.lcsoft.ChefsHubApp.service;
 
 
 
-import com.lcsoft.ChefsHubApp.model.dto.UserRegistrationDTO;
+import com.lcsoft.ChefsHubApp.model.dto.UserRegistrationDto;
 
 
 public interface UserService {
-    void registerUser(UserRegistrationDTO userRegistrationDto);
+    void registerUser(UserRegistrationDto userRegistrationDto);
 
 }

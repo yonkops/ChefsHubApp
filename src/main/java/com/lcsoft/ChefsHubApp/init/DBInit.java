@@ -21,12 +21,12 @@ public class DBInit implements CommandLineRunner {
     @Override
 
     public void run(String... args) throws Exception {
-        /*if(roleRepository.count() == 0){
+        if(roleRepository.count() == 0){
             for (RoleType roleType : RoleType.values()) {
                 Role role = new Role();
                 role.setName(roleType);
                 roleRepository.save(role);
             }
-        }*/
+        }
     }
 }

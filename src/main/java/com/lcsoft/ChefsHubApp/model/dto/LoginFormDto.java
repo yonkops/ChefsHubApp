@@ -9,11 +9,9 @@ import jakarta.validation.constraints.Size;
 public class LoginFormDto {
     @NotBlank(message = "Email is required")
     @Email(message = "Invalid email format")
-    @UniqueUserEmail
     private String email;
 
     @NotBlank(message = "Password is required")
-    @Size(min = 6, message = "Password must be at least 6 characters")
     private String password;
 
     public LoginFormDto() {

@@ -1,6 +1,6 @@
 package com.lcsoft.ChefsHubApp.validation;
 
-import com.lcsoft.ChefsHubApp.model.dto.UserRegistrationDTO;
+import com.lcsoft.ChefsHubApp.model.dto.UserRegistrationDto;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
@@ -9,7 +9,7 @@ public class PasswordMatchesValidator
 
     @Override
     public boolean isValid(Object value, ConstraintValidatorContext context) {
-        UserRegistrationDTO user = (UserRegistrationDTO) value;
+        UserRegistrationDto user = (UserRegistrationDto) value;
         return user.password().equals(user.confirmPassword());
     }
 }

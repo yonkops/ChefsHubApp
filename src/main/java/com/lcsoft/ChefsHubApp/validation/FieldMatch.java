@@ -10,7 +10,7 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
-@Constraint(validatedBy = UniqueUserEmailValidator.class)//todo
+@Constraint(validatedBy = FieldMatchValidator.class)//todo
 public @interface FieldMatch {
 
   String first();

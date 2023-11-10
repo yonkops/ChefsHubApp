@@ -1,13 +1,11 @@
 package com.lcsoft.ChefsHubApp.web;
 
 
-import com.lcsoft.ChefsHubApp.model.dto.UserRegistrationDTO;
+import com.lcsoft.ChefsHubApp.model.dto.UserRegistrationDto;
 import com.lcsoft.ChefsHubApp.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("/users")
@@ -21,13 +19,16 @@ public class UserRegistrationController {
   }
 
   @GetMapping("/register")
-  public String register() {
+  public String register(UserRegistrationDto userRegistrationDTO) {
     return "auth-register";
   }
 
   @PostMapping("/register")
-  public String register(UserRegistrationDTO registrationDto) {
+  public String register(@Valid UserRegistrationDto registrationDto, BindingResult bindingResult) {
+    if (bindingResult.hasErrors()){
+      return "auth-register";
+    }
       userService.registerUser(registrationDto);
-      return "redirect:/";
+      return "redirect:/users/login";
   }
 }

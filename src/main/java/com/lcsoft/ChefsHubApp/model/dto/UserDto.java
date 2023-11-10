@@ -2,6 +2,8 @@ package com.lcsoft.ChefsHubApp.model.dto;
 
 import com.lcsoft.ChefsHubApp.model.entity.Recipe;
 import com.lcsoft.ChefsHubApp.model.entity.Role;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import org.springframework.security.core.userdetails.User;
 
 import java.time.LocalDate;
@@ -11,7 +13,11 @@ import java.util.Set;
 public class UserDto {
     private String firstName;
     private String lastName;
+    @NotBlank(message = "Email is required")
+    @Email(message = "Invalid email format")
     private String email;
+
+    @NotBlank(message = "Password is required")
     private String password;
     private Set<Role> roles;
     private List<Recipe> recipes;
@@ -96,5 +102,9 @@ public class UserDto {
 
     public void setLastLoginDate(LocalDate lastLoginDate) {
         this.lastLoginDate = lastLoginDate;
+    }
+
+    public String getFullName() {
+        return firstName + " " + lastName;
     }
 }

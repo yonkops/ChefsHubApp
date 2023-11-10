@@ -2,7 +2,10 @@ package com.lcsoft.ChefsHubApp.service.impl;
 
 import com.lcsoft.ChefsHubApp.model.entity.Role;
 import com.lcsoft.ChefsHubApp.model.entity.UserEntity;
+import com.lcsoft.ChefsHubApp.model.enums.RoleType;
 import com.lcsoft.ChefsHubApp.model.repository.UserRepository;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Email;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -14,6 +17,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class CustomUserDetailsService implements UserDetailsService {
     private final UserRepository userRepository;
