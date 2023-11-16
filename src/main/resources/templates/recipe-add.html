@@ -17,131 +17,40 @@
           th:object="${createRecipeDto}"
           class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
         <div class="row">
-
-            <!-- model -->
+            <div class="text-center text-white font-weight-bold">
+                <label for="name">Recipe Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <!-- Category -->
             <div class="form-group col-md-6 mb-3">
-                <label class="text-center text-white font-weight-bold" for="modelId">Model</label>
-                <select id="modelId"
-                        th:name="modelId"
-                        th:errorclass="is-invalid"
-                        class="form-control">
-                    <option value="">- Select a model -</option>
-                    <optgroup
-                        th:each="brand: ${brands}"
-                        th:label="${brand.name()}">
-
-                        <option
-                            th:each="model : ${brand.models()}"
-                            th:text="${model.name}"
-                            th:value="${model.id}"
-                            th:selected="*{modelId} == ${model.id}">
-                                Model
-                        </option>
-
-                    </optgroup>
+                <label class="text-center text-white font-weight-bold">Food category</label>
+                <select name="categoryName">
+                    <option th:each="category : ${T(com.lcsoft.ChefsHubApp.model.enums.CategoryName).values()}"
+                            th:value="${category}" th:text="${category}"></option>
                 </select>
                 <p class="invalid-feedback errors alert alert-danger">
-                    Vechicle model is required.
+                    Recipe Type is required.
                 </p>
             </div>
-            <!-- EO: model -->
+            <div id="ingredients" class="form-group col-md-6 mb-3">
+                <label for="ingredients" class="text-white font-weight-bold">Ingredients:</label>
+                <div class="ingredient-group">
+                    <input type="text" class="ingredient-name" placeholder="Ingredient Name">
+                    <input type="number" class="ingredient-quantity" placeholder="Quantity">
+                    <select class="ingredient-unit">
+                        <option value="">Unit</option>
+                        <option value="g">grams</option>
+                        <option value="ml">milliliters</option>
+                        <option value="tsp">teaspoons</option>
+                        <option value="tbsp">tablespoons</option>
+                    </select>
+                </div>
+                <div class="ingredients">
+                    <button type="button" class="add-ingredient">Add ingredient</button>
+                </div>
 
-            <!-- Price -->
-            <div class="form-group col-md-6 mb-3">
-                <label for="price" class="text-white font-weight-bold">Price</label>
-                <input id="price"
-                       th:field="*{price}"
-                       th:errorclass="is-invalid"
-                       type="number"
-                       class="form-control"
-                       placeholder="Suggested price"/>
-                <p class="invalid-feedback errors alert alert-danger">
-                    Suggested price is required.
-                </p>
             </div>
-            <!-- EO: Price -->
         </div>
-
-
-        <div class="row">
-
-            <!-- Engine -->
-            <div class="form-group col-md-6 mb-3">
-                <label class="text-center text-white font-weight-bold" for="engine">Engine</label>
-                <select id="engine"
-                        th:field="*{engine}"
-                        th:errorclass="is-invalid"
-                        class="form-control">
-                    <option value="">- Select engine type -</option>
-                    <option th:each="e : ${engines}"
-                            th:text="${e}"
-                            th:value="${e}">
-                    </option>
-                </select>
-                <p class="invalid-feedback errors alert alert-danger">
-                    Engine type is required.
-                </p>
-            </div>
-            <!-- EO: Engine -->
-
-            <!-- Transmission -->
-            <div class="form-group col-md-6 mb-3">
-                <label class="text-center text-white font-weight-bold" for="transmission">Transmission</label>
-                <select
-                    id="transmission"
-                    th:field="*{transmission}"
-                    th:errorclass="is-invalid"
-                    class="form-control">
-                    <option value="">- Select transmission type -</option>
-                    <option th:each="t : ${T(org.softuni.mobilele.model.enums.TransmissionEnum).values()}"
-                        th:text="${t}"
-                        th:value="${t}"
-                        th:selected="${t} == *{transmission}">
-                    </option>
-                </select>
-                <p class="invalid-feedback  errors alert alert-danger">
-                    Transmission type is required.
-                </p>
-            </div>
-            <!-- EO: Transmission -->
-        </div>
-        <div class="row">
-            <!-- Year -->
-            <div class="form-group col-md-6 mb-3">
-                <label for="year" class="text-white font-weight-bold">Year</label>
-                <input id="year"
-                       th:errorclass="is-invalid"
-                       th:field="*{year}"
-                       type="number"
-                       class="form-control"
-                       placeholder="Manufacturing year"/>
-                <p th:if="${#fields.hasErrors('year')}"
-                   class="errors alert alert-danger"
-                   th:errors="*{year}">
-                </p>
-<!--                <p class="invalid-feedback errors alert alert-danger">-->
-<!--                    Manufacturing year is required.-->
-<!--                </p>-->
-            </div>
-            <!-- EO: Year -->
-
-            <!-- Mileage -->
-            <div class="form-group col-md-6 mb-3">
-                <label for="mileage" class="text-white font-weight-bold">Mileage</label>
-                <input id="mileage"
-                       th:errorclass="is-invalid"
-                       th:field="*{mileage}"
-                       type="number"
-                       class="form-control"
-                       placeholder="Mileage in kilometers"/>
-                <p class="invalid-feedback errors alert alert-danger">
-                    Mileage in kilometers is required.
-                </p>
-            </div>
-            <!-- EO: Mileage -->
-        </div>
-
-
         <!-- Description -->
         <div class="form-group">
             <label class="text-white font-weight-bold" for="description">Description</label>
@@ -160,7 +69,7 @@
         <!-- EO: Description -->
 
         <!-- Image URL -->
-        <div class="form-group">
+        <!--<div class="form-group">
             <label class="text-white font-weight-bold" for="imageUrl">Image URL</label>
             <input id="imageUrl"
                    th:field="*{imageUrl}"
@@ -170,7 +79,7 @@
             <p class="invalid-feedback errors alert alert-danger">
                 Vehicle image URL is required.
             </p>
-        </div>
+        </div>-->
         <!-- EO: Image URL -->
 
         <div class="row">
@@ -186,6 +95,51 @@
 <div>
     <footer> </footer>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script>
+    const ingredientsContainer = document.querySelectorAll(".ingredients");
+
+    const addIngredientButton = document.querySelector(".add-ingredient");
+    addIngredientButton.addEventListener("click", () => {
+        const newIngredient = document.createElement("div");
+        newIngredient.classList.add("ingredient");
+        newIngredient.innerHTML = `
+        <div class="ingredient-group">
+            <input type="text" class="ingredient-name" placeholder="Ingredient Name">
+            <input type="number" class="ingredient-quantity" placeholder="Quantity">
+            <select class="ingredient-unit">
+                <option value="">Unit</option>
+                <option value="g">grams</option>
+                <option value="ml">milliliters</option>
+                <option value="tsp">teaspoons</option>
+                <option value="tbsp">tablespoons</option>
+            </select>
+            <button type="button" class="remove-ingredient">Remove</button>
+        </div>`;
+
+        ingredientsContainer.forEach(container => container.appendChild(newIngredient));
+
+        // Насочете бутоните за премахване към новите събития
+        const removeIngredientButton = newIngredient.querySelector(".remove-ingredient");
+        removeIngredientButton.addEventListener("click", () => {
+            newIngredient.parentElement.removeChild(newIngredient);
+        });
+    });
+
+    const removeIngredientButtons = document.querySelectorAll(".remove-ingredient");
+
+    for (const button of removeIngredientButtons) {
+        button.addEventListener("click", () => {
+            // Тук грешката е, че removeChild очаква елемент, а не клас
+            button.parentElement.parentElement.removeChild(button.parentElement);
+        });
+    }
+</script>
 
 </body>
 </html>
+
+
+
+

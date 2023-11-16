@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{fragments/head}">
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<div>
+    <nav th:replace="~{fragments/navbar}"></nav>
+</div>
+
+<div class="container-fluid">
+    <h2 class="text-center text-white mt-5">Add Recipe</h2>
+
+    <form action="/submit-recipe" method="post">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+        <label for="name">Recipe Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="category">Category:</label>
+        <select id="category" name="category" required>
+            <option value="">Select a category</option>
+            <#list Category.values() as category>
+            <option value="${category.name()}">${category.name()}</option>
+            </#list>
+        </select>
+
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" rows="5" required></textarea>
+
+        <label for="ingredients">Ingredients:</label>
+        <div id="ingredients">
+            <div class="ingredient-group">
+                <input type="text" class="ingredient-name" placeholder="Ingredient Name">
+                <input type="number" class="ingredient-quantity" placeholder="Quantity">
+                <select class="ingredient-unit">
+                    <option value="">Unit</option>
+                    <option value="g">grams</option>
+                    <option value="ml">milliliters</option>
+                    <option value="tsp">teaspoons</option>
+                    <option value="tbsp">tablespoons</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="add-ingredient">
+            <button type="button">Add Ingredient</button>
+        </div>
+
+        <label for="instructions">Instructions:</label>
+        <textarea id="instructions" name="instructions" rows="10" required></textarea>
+
+        <button type="submit">Submit Recipe</button>
+    </form>
+</div>
+
+<div>
+    <footer> </footer>
+</div>
+
+</body>

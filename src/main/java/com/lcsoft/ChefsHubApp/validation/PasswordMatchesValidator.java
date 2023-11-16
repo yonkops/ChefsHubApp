@@ -10,6 +10,6 @@ public class PasswordMatchesValidator
     @Override
     public boolean isValid(Object value, ConstraintValidatorContext context) {
         UserRegistrationDto user = (UserRegistrationDto) value;
-        return user.password().equals(user.confirmPassword());
+        return user.getPassword().equals(user.getConfirmPassword());
     }
 }

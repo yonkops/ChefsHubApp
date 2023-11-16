@@ -37,10 +37,10 @@ public class UserServiceImpl implements UserService {
 
         Role defaultRole = roleRepository.findByName(RoleType.COMMON_USER).orElseThrow(() -> new RuntimeException("Role not found"));
         return new UserEntity()
-        .setFirstName(userRegistrationDto.firstName())
-        .setLastName(userRegistrationDto.lastName())
-        .setEmail(userRegistrationDto.email())
-        .setPassword(passwordEncoder.encode(userRegistrationDto.password()))
+        .setFirstName(userRegistrationDto.getFirstName())
+        .setLastName(userRegistrationDto.getLastName())
+        .setEmail(userRegistrationDto.getEmail())
+        .setPassword(passwordEncoder.encode(userRegistrationDto.getPassword()))
         .setCreationDate(LocalDate.now())
         .setRoles(Collections.singleton(defaultRole));
     }

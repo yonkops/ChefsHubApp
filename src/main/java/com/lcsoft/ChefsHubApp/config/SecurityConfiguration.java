@@ -49,9 +49,9 @@ public class SecurityConfiguration {
                         // Allow access to static resources (e.g., CSS, JavaScript) for all users
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                         // Allow access to specific endpoints for all users
-                        .requestMatchers("/", "/users/login", "/users/register").permitAll()
+                        .requestMatchers("/", "/users/login", "/users/register", "recipe/add").permitAll()
                         .requestMatchers("/error").permitAll()
-                        .requestMatchers("/recipe/add").authenticated()
+                        //.requestMatchers("/recipe/add").authenticated()
                         //.requestMatchers("/admin/**").hasRole(RoleType.ADMIN.name())
                         //.requestMatchers("/users/**").hasRole(RoleType.COMMON_USER.name())
                         // Require authentication for any other request
